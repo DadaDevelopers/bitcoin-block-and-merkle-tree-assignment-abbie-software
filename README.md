@@ -1,148 +1,113 @@
-# assignment-6
+# Assignment 6: Bitcoin Block and Merkle Tree Assignment
 
-# Bitcoin Block and Merkle Tree Assignment
-
-## Assignment Overview
-
-This assignment will help you understand Bitcoin's block structure and Merkle tree construction through hands-on exploration and visualization.
+## Overview
+This assignment explores Bitcoin's block structure and Merkle tree construction through hands-on exploration and visualization.
 
 ---
 
 ## Task 1: Block Inspection
 
-### Instructions
+**Status:**  Complete
 
-Use a blockchain explorer to inspect a specific Bitcoin block:
+**Block Details:**
+-| **Block Height** | 964736 |
+| **Block Hash** | 000000000000000000013f386abff9abeda1dac7431d6703a4d14d3ac9e4bd76 |
+| **Previous Block Hash** | 964735 |
+| **Merkle Root** | 47b9e398d4b000dff4a631b5c60f7c5f3df7ca6bafeae9ac37dc286a93ee202b |
+| **Number of Transactions** | 4388 |
+| **Timestamp** | 2026-08-30 17:06:39 |
 
-**Recommended Explorers:**
-- [mempool.space](https://mempool.space)
-- [blockchain.com](https://www.blockchain.com/explorer)
+**Explorer Used:** mempool.space
 
-### Requirements
-
-Find and document the following information for a specific block:
-
-1. **Block Height**: The position of the block in the blockchain
-2. **Block Hash**: The unique identifier of the block
-3. **Previous Block Hash**: The hash of the block that came before this one
-4. **Merkle Root**: The root hash of the Merkle tree containing all transactions
-
-### Submission Format
-
-Create a document with the following structure:
-
-```
-Block Inspection Results
-------------------------
-Block Height: [your answer]
-Block Hash: [your answer]
-Previous Block Hash: [your answer]
-Merkle Root: [your answer]
-Number of Transactions: [your answer]
-Timestamp: [your answer]
-```
+**Key Findings:**
+- The block contains 4,388 transactions.
+- The Merkle root is a cryptographic summary of all transactions.
+- The previous block hash links this block to the one before it, forming the blockchain.
 
 ---
 
 ## Task 2: Merkle Tree Visualization
 
-### Instructions
+**Status:** Complete
 
-Construct a Merkle tree from 4 example transaction hashes to demonstrate how the Merkle root is calculated.
+**Transaction Hashes Used:**
+| Transaction | Hash |
+|-------------|------|
+| **TxA** | 5ecffdb73872911773b0316a6be3b0148f2e57f272f659237c4334b6c97ec2f7 |
+| **TxB** | f6dfd5b3b0dc2c5ea42e3b424ee6377c8070d011acc6b24ddc25a6491a3ffbdf |
+| **TxC** | 595c018fded6c7fcfc25730b34adb02c306a5a444132ab195e089dee72428207 |
+| **TxD** | 5c3795afa3f404ddf268f5528b5f9dbc6c42ad6440d2d24cfbf6214b2f37f961 |
+### Merkle Tree Diagram
+       Merkle Root
+             |
++------------+------------+
+|                         |
+Hash(AB)              Hash(CD)
+|                         |
++---+---+             +---+---+
+|       |             |       |
+TxA    TxB           TxC     TxD
 
-### Requirements
-
-1. **Choose 4 Transaction Hashes**
-   - You can use real transaction hashes from the block you inspected in Task 1
-   - Or create example hashes for demonstration purposes
-
-2. **Construct the Merkle Tree**
-   - Show the tree structure visually (diagram, ASCII art, or drawing)
-   - Label each level of the tree clearly
-   - Show the hashing process at each level
-
-3. **Calculate the Merkle Root**
-   - Document each step of the calculation
-   - Show how pairs of hashes are combined and re-hashed
-   - Verify that your final result matches the expected Merkle root
-
-### Expected Tree Structure
-
-```
-                    Merkle Root
-                        |
-            +-----------+-----------+
-            |                       |
-        Hash(AB)                Hash(CD)
-            |                       |
-        +---+---+               +---+---+
-        |       |               |       |
-      TxA     TxB             TxC     TxD
-```
-
-### Tools You Can Use
-
-- Pen and paper
-- Diagram tools (draw.io, Lucidchart, Excalidraw)
-- Code (Python, JavaScript, etc.)
-- ASCII art in your README
 
 ---
 
-## Submission Guidelines
+**Calculated Values:**
+- Hash(AB): 52f502d53b40c733df45a0220c85acfe9ab59ae03c7799a91806d8bcb490b3c6
+- Hash(CD): 6485357dfc861796f3a10b98d7e1a9417b4bf9d1294b7ca3cece125db98254f9
 
-### What to Submit
+- Merkle Root: 15535c8f5211390a31a86c2cc7e4e8ab624591419077b6bece93b5453e7dffac
 
-1. A markdown file (`.md`) or PDF containing:
-   - Your block inspection findings (Task 1)
-   - Your Merkle tree visualization (Task 2)
-   - Explanation of your process and findings
+### Verification
 
-2. If you used code:
-   - Include your source code files
-   - Add comments explaining your logic
+| Check | Result |
+|-------|--------|
+| Computed Merkle Root (for 4 transactions) |  15535c8f5211390a31a86c2cc7e4e8ab624591419077b6bece93b5453e7dffac |
+| Block's Merkle Root (for all 4,388 transactions) |47b9e398d4b000dff4a631b5c60f7c5f3df7ca6bafeae9ac37dc286a93ee202b |
+| Match | NO(Expected — block has 4,388 transactions, not just 4) |
 
-### Submission Format
-
-Your submission should include:
-
-```
-📁 assignment-submission/
-├── README.md (your main report)
-├── block-inspection.md (Task 1 results)
-├── merkle-tree-diagram.png (or .pdf)
-└── code/ (optional, if you wrote code)
-    └── merkle_tree.py (or other files)
-```
+**Key Insight:**
+The computed Merkle root does not match the block's Merkle root because:
+- My calculation uses only 4 transactions (TxA, TxB, TxC, TxD)
+- The block's Merkle root uses all 4,967 transactions in the block
+- This demonstrates that Merkle roots are unique to the exact set of transactions used
 
 ---
 
-## Learning Objectives
+## Files in This Submission
 
-By completing this assignment, you will:
-
-- Understand the structure of a Bitcoin block
-- Learn how blocks are linked together via hashes
-- Visualize how Merkle trees efficiently prove transaction inclusion
-- Gain familiarity with blockchain explorers
+| File | Description |
+|------|-------------|
+| `README.md` | This main report |
+| `block-inspection.md` | Detailed Task 1 results |
+| `merkle-tree-diagram.pdf` | Visual Merkle tree diagram |
+| `code/calculate_merkle.py` | Python script for Merkle root calculation |
 
 ---
 
-## Resources
+## How to Run the Code
 
-### Blockchain Explorers
-- [Mempool.space](https://mempool.space) - Clean UI, detailed information
-- [Blockchain.com](https://www.blockchain.com/explorer) - Classic explorer
-- [Blockstream.info](https://blockstream.info) - Technical details
+```bash
+cd code
+python3 calculate_merkle.py
+Tools Used
+Block Explorer: mempool.space
 
-### Learning Resources
-- [Bitcoin Developer Guide - Block Chain](https://developer.bitcoin.org/devguide/block_chain.html)
-- [Merkle Trees Explained](https://www.investopedia.com/terms/m/merkle-tree.asp)
-- [How Bitcoin Works Under the Hood](https://www.youtube.com/watch?v=Lx9zgZCMqXE)
+Programming Language: Python 3
 
-### Optional Tools
-- [Online SHA-256 Calculator](https://emn178.github.io/online-tools/sha256.html)
-- [Python hashlib documentation](https://docs.python.org/3/library/hashlib.html)
+Libraries: hashlib (standard library)
 
+Key Learnings
+Merkle trees allow efficient verification of transactions without downloading the entire block.
 
-Good luck! 🚀
+Changing any transaction changes the Merkle root, ensuring data integrity.
+
+The Merkle root is stored in the block header, securing all transactions in the block.
+
+Merkle roots are unique to the exact set of transactions they are computed from.
+
+References
+mempool.space
+
+Bitcoin Developer Guide - Merkle Trees
+
+Bitcoin.org - Block Headers
